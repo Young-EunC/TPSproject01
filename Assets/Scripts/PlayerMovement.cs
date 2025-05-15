@@ -51,7 +51,18 @@ public class PlayerMovement : MonoBehaviour
         return rotateDirVector.normalized;
     }
 
-    public void SetBodyRotation() { }
+    public void SetBodyRotation(Vector3 direction)
+    {
+        if (direction == Vector3.zero) return;
+
+        Quaternion targetRotation = Quaternion.LookRotation(direction);
+
+        _avatar.rotation = Quaternion.Lerp(
+            _avatar.rotation,
+            targetRotation,
+            _playerStats.RotateSpeed * Time.deltaTime
+            );
+    }
 
     private Vector2 GetMouseDirection() {
         float mouseX = Input.GetAxis("Mouse X") * _mouseSensitivity;
@@ -63,7 +74,7 @@ public class PlayerMovement : MonoBehaviour
         Vector3 direction = (transform.right * input.x) + (transform.forward * input.z);
         return direction.normalized;
     }
-    private Vector3 GetInputDirection() {
+    public Vector3 GetInputDirection() {
         float x = Input.GetAxisRaw("Horizontal");
         float z = Input.GetAxisRaw("Vertical");
         return new Vector3(x, 0, z);
