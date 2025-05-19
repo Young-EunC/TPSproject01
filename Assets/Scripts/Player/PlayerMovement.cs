@@ -35,7 +35,6 @@ public class PlayerMovement : MonoBehaviour
         velocity.z = moveDirection.z * moveSpeed;
 
         _rigid.velocity = velocity;
-
         return moveDirection;
     }
     public Vector3 SetAimRotation() {

@@ -1,9 +1,8 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using DesignPattern;
 
-public class GameManager : Singletone<GameManager>
+public interface IDamagable 
 {
-    
+    public void TakeDamaged(int value);
 }
